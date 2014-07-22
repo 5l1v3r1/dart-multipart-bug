@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:async';
-import 'package:http_server/http_server.dart';
 import 'package:mime/mime.dart';
 
 void main(List<String> args) {
@@ -47,8 +46,7 @@ void requestHandler(HttpRequest request) {
 void handleFileUpload(HttpRequest request) {
   String boundary = request.headers.contentType.parameters['boundary'];
   request.transform(new MimeMultipartTransformer(boundary))
-    .map(HttpMultipartFormData.parse)
-    .listen((HttpMultipartFormData formData) {
+    .listen((MimeMultipart formData) {
       // if I do this, it works:
       // print('listening for data...');
       // formData.listen((x) => print('got data of length ${x.length}'));
