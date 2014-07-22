@@ -49,12 +49,14 @@ void handleFileUpload(HttpRequest request) {
   request.transform(new MimeMultipartTransformer(boundary))
     .map(HttpMultipartFormData.parse)
     .listen((HttpMultipartFormData formData) {
-      // if I do this, it works
+      // if I do this, it works:
+      // print('listening for data...');
       // formData.listen((x) => print('got data of length ${x.length}'));
       
       // this does NOT work
       Duration duration = new Duration(seconds: 1);
       new Timer(duration, () {
+        print('listening for data...');
         formData.listen((x) => print('got data of length ${x.length}'));
       });
     }, onDone: () {
