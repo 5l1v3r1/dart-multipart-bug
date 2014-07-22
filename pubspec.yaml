@@ -1,0 +1,4 @@
+name: problem-shower
+dependencies:
+  http_server: any
+
