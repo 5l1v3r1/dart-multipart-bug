@@ -35,10 +35,10 @@ void requestHandler(HttpRequest request) {
   // write the index
   HttpResponse response = request.response;
   new File('index.html').readAsBytes().then((body) {
-    response.headers.contentType = 'text/html';
+    response.headers.contentType = ContentType.parse('text/html');
     response..add(body)..close();
   }).catchError((error) {
-    response.headers.contentType = 'text/plain';
+    response.headers.contentType = ContentType.parse('text/plain');
     response.statusCode = 500;
     response..write('Error reading file: $error')..close();
   });
@@ -59,7 +59,7 @@ void handleFileUpload(HttpRequest request) {
       });
     }, onDone: () {
       HttpResponse response = request.response;
-      response.headers.contentType = 'text/html';
+      response.headers.contentType = ContentType.parse('text/html');
       response..write('Upload complete!')..close();
     });
 }
